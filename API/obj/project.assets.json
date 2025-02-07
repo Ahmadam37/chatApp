@@ -3634,19 +3634,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\TEMP.AHMADAM37\\.nuget\\packages\\": {}
+    "C:\\Users\\ahmadam37\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\TEMP.AHMADAM37\\OneDrive\\Desktop\\Development\\WebDevelopment\\Projects\\chatApp\\API\\API.csproj",
+      "projectUniqueName": "C:\\Users\\ahmadam37\\OneDrive\\Desktop\\Development\\WebDevelopment\\Projects\\chatApp\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "C:\\Users\\TEMP.AHMADAM37\\OneDrive\\Desktop\\Development\\WebDevelopment\\Projects\\chatApp\\API\\API.csproj",
-      "packagesPath": "C:\\Users\\TEMP.AHMADAM37\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\TEMP.AHMADAM37\\OneDrive\\Desktop\\Development\\WebDevelopment\\Projects\\chatApp\\API\\obj\\",
+      "projectPath": "C:\\Users\\ahmadam37\\OneDrive\\Desktop\\Development\\WebDevelopment\\Projects\\chatApp\\API\\API.csproj",
+      "packagesPath": "C:\\Users\\ahmadam37\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ahmadam37\\OneDrive\\Desktop\\Development\\WebDevelopment\\Projects\\chatApp\\API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\TEMP.AHMADAM37\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\ahmadam37\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
