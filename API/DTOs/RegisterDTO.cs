@@ -1,6 +1,6 @@
 using System;
 
-namespace API.DTO_s;
+namespace API.DTOs;
 
 public class RegisterDTO
 {

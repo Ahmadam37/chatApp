@@ -2,7 +2,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 using API.Data;
-using API.DTO_s;
+using API.DTOs;
 using API.Entitites;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +30,33 @@ public class AccountController(DataContext context) : BaseApiController
 
         context.Users.Add(user);
         await context.SaveChangesAsync();
+
+
+        return user;
+    }
+
+
+    public async Task<ActionResult<AppUser>> Login(LoginDTO loginDTO){
+
+        var user = await context.Users.FirstOrDefaultAsync(x => x.UserName != loginDTO.username);
+
+        if (user == null){
+
+            return Unauthorized("Invalid username");
+        }
+
+        using var hmac = new HMACSHA512(user.PasswordSalt);
+
+        var computeHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDTO.password));
+
+
+        for (int i = 0; i < computeHash.Length; i++)
+        {
+            if(computeHash[i] != user.PasswordHash[i]){
+
+                return Unauthorized("Invalid Password");
+            }
+        }
 
 
         return user;
