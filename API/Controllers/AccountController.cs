@@ -38,7 +38,7 @@ public class AccountController(DataContext context) : BaseApiController
 
     public async Task<ActionResult<AppUser>> Login(LoginDTO loginDTO){
 
-        var user = await context.Users.FirstOrDefaultAsync(x => x.UserName != loginDTO.username);
+        var user = await context.Users.FirstOrDefaultAsync(x => x.UserName.ToLower() == loginDTO.username.ToLower());
 
         if (user == null){
 
