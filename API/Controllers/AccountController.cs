@@ -18,7 +18,7 @@ public class AccountController(DataContext context) : BaseApiController
 
         if(await UserExitist(registerDTO.Username)) return BadRequest("User name are taken!");
 
-        using var hmac = new HMACSHA256();
+        using var hmac = new HMACSHA512();
 
 
         var user = new AppUser
@@ -36,26 +36,22 @@ public class AccountController(DataContext context) : BaseApiController
     }
 
     [HttpPost("login")]
-    public async Task<ActionResult<AppUser>> Login(LoginDTO loginDTO){
+    public async Task<ActionResult<AppUser>> Login(LoginDTO loginDTO)
+    {
 
-        var user = await context.Users.FirstOrDefaultAsync(x => x.UserName.ToLower() == loginDTO.username.ToLower());
+        var user = await context.Users.FirstOrDefaultAsync(x => x.UserName.ToLower() == loginDTO.Username.ToLower());
 
-        if (user == null){
-
-            return Unauthorized("Invalid username");
-        }
+        if (user == null) return Unauthorized("Invalid username");
 
         using var hmac = new HMACSHA512(user.PasswordSalt);
 
-        var computeHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDTO.password));
+        var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDTO.Password));
 
 
-        for (int i = 0; i < computeHash.Length; i++)
+        for (int i = 0; i < computedHash.Length; i++)
         {
-            if(computeHash[i] != user.PasswordHash[i]){
-
-                return Unauthorized("Invalid Password");
-            }
+            if (computedHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid Password");
+            
         }
 
 
