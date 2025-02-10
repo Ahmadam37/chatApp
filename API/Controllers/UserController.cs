@@ -1,6 +1,7 @@
 using System;
 using API.Data;
 using API.Entitites;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,7 +10,7 @@ namespace API.Controllers;
 
 public class UserController(DataContext context) : BaseApiController
 {
-
+    [AllowAnonymous]
     [HttpGet]
     public async  Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
     {
@@ -17,7 +18,7 @@ public class UserController(DataContext context) : BaseApiController
 
         return Ok(users);
     }
-    
+    [Authorize]
     [HttpGet("{id:int}")] // api/users/2
     public async Task<ActionResult<AppUser>> GetUser(int id)
     {
