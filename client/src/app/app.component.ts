@@ -14,13 +14,12 @@ import { HomeComponent } from './home/home.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-  http = inject(HttpClient);
   private accountServices = inject(AccountService)
   title = 'client';
-  users: any;
+
 
   ngOnInit(): void {
-  this.getUsers();
+
   this.setCurrentUser()
   }
 
@@ -33,11 +32,5 @@ export class AppComponent implements OnInit {
   }
 
 
-  getUsers(){
-    this.http.get('https://localhost:8932/api/user').subscribe({
-      next: response =>  this.users = response,
-      error: error => console.error(error),
-      complete: () => console.log("Request has completed")
-    })
-  }
+ 
 }
