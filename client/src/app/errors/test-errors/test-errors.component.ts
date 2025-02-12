@@ -10,6 +10,7 @@ import { Component, inject } from '@angular/core';
 export class TestErrorsComponent {
  baseURL = "https://localhost:8932/api/"
  private http = inject(HttpClient);
+ validationError: string[] = [];
 
 
 
@@ -46,7 +47,10 @@ export class TestErrorsComponent {
     next: response => {
       console.log(response)
     },
-    error: error => console.log(error)
+    error: error => {
+      console.log(error);
+      this.validationError = error;
+    }
   })
  }
 
