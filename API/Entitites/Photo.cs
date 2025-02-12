@@ -1,5 +1,8 @@
-namespace API.Entitites;
+using System.ComponentModel.DataAnnotations.Schema;
 
+namespace API.Entitites;
+    
+[Table("Photos")]
 public class Photo
 {
 
@@ -10,5 +13,12 @@ public class Photo
     public bool isMan { get; set; }
 
     public string? PublicId { get; set; }
+
+
+    //Navigation prop
+
+    public int AppUserId {get; set;}
+
+    public AppUser AppUser { get; set; } = null!;
 
 }
