@@ -1,1 +1,4 @@
-<p>server-errors works!</p>
+<h4>Internal server Error</h4>
+@if (error) {
+    <h5>Error: {{error.messages}}</h5>
+}
