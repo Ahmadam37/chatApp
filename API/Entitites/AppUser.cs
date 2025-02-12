@@ -1,4 +1,5 @@
 using System;
+using API.Extensions;
 
 namespace API.Entitites;
 
@@ -26,7 +27,9 @@ public class AppUser
     public List<Photo> Photos {get; set;} = [];
 
 
+    public int GetAge(){
 
-
+        return DateOfBirth.CalculateAge();
+    }
     
 }
