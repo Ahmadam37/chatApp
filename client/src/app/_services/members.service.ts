@@ -14,14 +14,15 @@ export class MembersService {
   baseUrl = environment.apiUrl
 
 
+  
 
   getMembers(){
-    this.http.get<Member[]>(this.baseUrl+'users' , this.getHttpOptions());
+   return this.http.get<Member[]>(this.baseUrl+'user' , this.getHttpOptions());
   }
 
 
   getMember(username: string){
-    this.http.get<Member>(this.baseUrl+'users/'+username , this.getHttpOptions());
+    return  this.http.get<Member>(this.baseUrl+'user/'+username , this.getHttpOptions());
   }
 
   getHttpOptions(){
