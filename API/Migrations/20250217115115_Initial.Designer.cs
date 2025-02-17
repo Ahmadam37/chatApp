@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250213161753_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250217115115_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,7 +77,7 @@ namespace API.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("API.Entitites.Photos", b =>
+            modelBuilder.Entity("API.Entitites.Photo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -93,6 +93,7 @@ namespace API.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Url")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -102,7 +103,7 @@ namespace API.Migrations
                     b.ToTable("Photos");
                 });
 
-            modelBuilder.Entity("API.Entitites.Photos", b =>
+            modelBuilder.Entity("API.Entitites.Photo", b =>
                 {
                     b.HasOne("API.Entitites.AppUser", "AppUser")
                         .WithMany("Photos")

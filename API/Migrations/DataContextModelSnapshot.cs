@@ -83,15 +83,15 @@ namespace API.Migrations
                     b.Property<int>("AppUserId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("PublicId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Url")
                         .IsRequired()
                         .HasColumnType("TEXT");
-
-                    b.Property<bool>("isMan")
-                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
