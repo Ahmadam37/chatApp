@@ -1,9 +1,10 @@
-import { Component, inject, NgModule, OnInit } from '@angular/core';
+import { Component, inject, NgModule, OnInit, ViewChild, viewChild } from '@angular/core';
 import { Member } from '../../_models/member';
 import { AccountService } from '../../_services/account.service';
 import { MembersService } from '../../_services/members.service';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
+import {  ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-member-edit',
@@ -13,9 +14,11 @@ import { FormsModule, NgModel } from '@angular/forms';
   styleUrl: './member-edit.component.css'
 })
 export class MemberEditComponent implements OnInit{
+  @ViewChild('editForm') editForm?: NgForm;
   member?: Member;
   private accountService = inject(AccountService);
   private memberService = inject(MembersService)
+  toastr = inject(ToastrService);
   ngOnInit(): void {
     this.loadMember();
   }
@@ -27,6 +30,11 @@ export class MemberEditComponent implements OnInit{
     this.memberService.getMember(user.username).subscribe({
       next: member => this.member = member
     })
+  }
+
+  updateMember(){
+    this.toastr.success("Profile Updated successfully")
+    this.editForm?.reset(this.member);
   }
 
 }
