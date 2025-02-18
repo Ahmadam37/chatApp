@@ -1,3 +1,85 @@
 @if (member) {
+    <div class="row">
+        <div class="col-4">
+            <h1>Your Profile</h1>
+        </div>
+        <div class="col-8">
+            <div class="alert alert-info">
+                <p><strong>Information:</strong>
+                You have made changes. Any unsaved will be lost</p>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card">
+                <img class="card-img img-thumbnail" src="{{member.photoUrl || './assets/user.png'}}"
+                    alt="{{member.knownAs}}" srcset="">
+                <div class="card-body">
+                    <div>
+                        <strong>location:</strong>
+                        <p>{{member.city}} , {{member.country}}</p>
+                    </div>
+                    <div>
+                        <strong>Age:</strong>
+                        <p>{{member.age}}</p>
+                    </div>
+                    <div>
+                        <strong>Last Active:</strong>
+                        <p>{{member.lastActive}}</p>
+                    </div>
+                    <div>
+                        <strong>Member Since:</strong>
+                        <p>{{member.created}}</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group d-flex">
+                        <button class="btn btn-success col-12">Save changes</button>
     
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <tabset class="member-tabset">
+                <tab heading="About {{member.knownAs}}">
+                    <form>
+                        <h4 class="mt-2">Description</h4>
+                        <textarea class="form-control"
+                         name="introduction"
+                          id=""
+                          [(ngModel)]="member.introduction"
+                          rows="6"
+                          >
+                        </textarea>
+                        <h4>Looking For</h4>
+                        <textarea class="form-control"
+                        name="LookingFor"
+                         id=""
+                         [(ngModel)]="member.lookingFor"
+                         rows="6"
+                         ></textarea>
+                         <h4>interests</h4>
+                         <textarea class="form-control"
+                         name="interests"
+                          id=""
+                          [(ngModel)]="member.interests"
+                          rows="6"
+                          ></textarea>
+
+                          <div class="d-flex align-items-center">
+                            <label for="">City:</label>
+                            <input class="form-control mx-2" type="text" name="city" [(ngModel)]="member.city">
+                            <label for="">Country:</label>
+                            <input class="form-control mx-2" type="text" name="country" [(ngModel)]="member.country">
+                          </div>
+                    </form>
+                   
+                </tab>
+                <tab heading="Edit Photo">
+                  Photo edit here
+                </tab>
+               
+            </tabset>
+        </div>
+    </div>
 }
