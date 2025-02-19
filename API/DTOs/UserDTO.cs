@@ -9,4 +9,9 @@ public class UserDTO
 
     public required string token { get; set; }
 
+    public  string? PhotoUrl { get; set; }
+
+
+
+
 }
