@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { Member } from '../_models/member';
 import { AccountService } from './account.service';
 import { of, tap } from 'rxjs';
+import { Photo } from '../_models/photo';
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +40,21 @@ updateMember(member: Member){
     })
   )
 }
+
+setMainPhoto(photo: Photo) {
+  return this.http.put(this.baseUrl + 'user/set-main-photo/' + photo.id, {}).pipe(
+    tap(() => {
+      this.members.update(members => 
+        members.map(m => {
+          if (m.photos.some(p => p.id === photo.id)) {  // Ensure correct matching
+            return { ...m, photoUrl: photo.url };  // Return a new object with updated photoUrl
+          }
+          return m;  // Return unchanged member
+        })
+      );
+    })
+  );
+}
+
 
 }
