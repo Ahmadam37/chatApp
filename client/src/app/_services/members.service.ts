@@ -56,5 +56,19 @@ setMainPhoto(photo: Photo) {
   );
 }
 
+deletePhoto(photo: Photo){
+  return this.http.delete(this.baseUrl + 'user/delete-photo/' + photo.id).pipe(
+    tap(() => {
+      this.members.update(members => 
+        members.map(m => {
+          if (m.photos.includes(photo)) {  // Ensure correct matching
+            m.photos = m.photos.filter(x => x.id !== photo.id) // Return a new object with updated photoUrl
+          }
+          return m;  // Return unchanged member
+        })
+      );
+    })
+  );
+}
 
 }
