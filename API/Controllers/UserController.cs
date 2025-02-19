@@ -46,7 +46,6 @@ public class UserController(IUserRepository userRepository, IMapper mapper, IPho
     }
 
     [HttpPost("add-photo")]
-    [Obsolete]
     public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)
     {
         var user = await userRepository.GetUserByUsernameAsync(User.GetUsername());
@@ -59,7 +58,7 @@ public class UserController(IUserRepository userRepository, IMapper mapper, IPho
 
         var photo = new Photo
         {
-            Url = result.SecureUri.AbsolutePath,
+            Url = result.SecureUrl.AbsoluteUri,
             PublicId = result.PublicId
         };
 

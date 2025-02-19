@@ -11,11 +11,11 @@ namespace API.Services;
 public class PhotoService : IPhotoService
 {
 
-    private readonly Cloudinary cloudinary;
+    private readonly Cloudinary _cloudinary;
     public PhotoService(IOptions<CloudinarySettings> config){
         var acc = new Account(config.Value.CloudName, config.Value.ApiKey, config.Value.ApiSecret);
 
-        cloudinary = new Cloudinary(acc);
+        _cloudinary = new Cloudinary(acc);
     }
     public async Task<ImageUploadResult> AddPhotoAsync(IFormFile file)
     {
@@ -29,7 +29,7 @@ public class PhotoService : IPhotoService
                 Transformation = new Transformation().Height(500).Width(500).Crop("fill").Gravity("face"),Folder="da-net8"
             };
 
-            uploadResult = await cloudinary.UploadAsync(uploadParams);
+            uploadResult = await _cloudinary.UploadAsync(uploadParams);
 
         }
             return uploadResult;
@@ -40,6 +40,6 @@ public class PhotoService : IPhotoService
     {
         var deleteParams = new DeletionParams(publicId);
 
-        return await cloudinary.DestroyAsync(deleteParams);
+        return await _cloudinary.DestroyAsync(deleteParams);
     }
 }
