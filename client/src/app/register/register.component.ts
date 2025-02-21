@@ -1,51 +1,67 @@
-import { Component, inject, input, output } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators} from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AccountService } from '../_services/account.service';
+import { ToastrService } from 'ngx-toastr';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormControlDirective } from '@angular/forms';
+import { Router } from '@angular/router';
+import { TextInputComponent } from '../_forms/text-input/text-input.component';
+import { DateInputComponent } from '../_forms/date-input/date-input.component';  // Import the DateInputComponent
+import { NgIf, NgFor } from '@angular/common';  // Import directives like NgIf and NgFor
 
 @Component({
   selector: 'app-register',
-  standalone:true,
-  imports: [ReactiveFormsModule],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrls: ['./register.component.css'],
+  standalone: true,
+  imports: [ReactiveFormsModule, TextInputComponent, DateInputComponent, NgIf, NgFor]  // Use components and directives here
 })
-export class RegisterComponent {
-  private accountService = inject(AccountService)
-   usersFromHomeComponent = input.required<any>()
-   cancleRegister = output<boolean>();
-  model: any = {}
-  registerForm: FormGroup = new FormGroup({}); 
+export class RegisterComponent implements OnInit {
+  @Output() cancelRegister = new EventEmitter();
+  registerForm!: FormGroup;
+  maxDate!: Date;
+  validationErrors: string[] = [];
 
+  constructor(
+    private accountService: AccountService,
+    private toastr: ToastrService,
+    private fb: FormBuilder,
+    private router: Router
+  ) { }
 
-  initilizedForm(){
-    this.registerForm = new FormGroup({
-      username: new FormControl('' , [Validators.required]),
-      password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
-      confirmPassword: new FormControl([Validators.required , this.matchValues('password')]),
+  ngOnInit(): void {
+    this.intitializeForm();
+    this.maxDate = new Date();
+    this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
+  }
+
+  intitializeForm() {
+    this.registerForm = this.fb.group({
+      gender: ['male'],
+      username: ['', Validators.required],
+      knownAs: ['', Validators.required],
+      dateOfBirth: ['', Validators.required],
+      city: ['', Validators.required],
+      country: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(8)]],
+      confirmPassword: ['', [Validators.required, this.matchValues('password')]]
+    })
+  }
+
+  matchValues(matchTo: string) {
+    return (control: any) => {
+      const parent = control?.parent;
+      return control?.value === parent?.get(matchTo)?.value ? null : { isMatching: true };
+    };
+  }
+
+  register() {
+    this.accountService.register(this.registerForm.value).subscribe(response => {
+      this.router.navigateByUrl('/members');
+    }, error => {
+      this.validationErrors = error;
     });
-    this.registerForm.controls['password'].valueChanges.subscribe({
-      next: () => this.registerForm.controls['confirmPassword'].updateValueAndValidity()
-    })
   }
 
-  matchValues(matchTo: string): ValidatorFn {
-    return (control: AbstractControl) => {
-      return control.value === control.parent?.get(matchTo)?.value ? null : {isMatching: true}
-    }
-  }
-
-  register(){
-    this.accountService.register(this.model).subscribe({
-      next: response => {
-        console.log(response);
-        this.cancel
-      },
-      error: error => console.log(error) 
-      
-    })
-  }
-
-  cancel(){
-    this.cancleRegister.emit(false)
+  cancel() {
+    this.cancelRegister.emit(false);
   }
 }
