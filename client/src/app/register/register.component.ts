@@ -22,7 +22,6 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
-    private toastr: ToastrService,
     private fb: FormBuilder,
     private router: Router
   ) { }
@@ -54,11 +53,17 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    this.accountService.register(this.registerForm.value).subscribe(response => {
-      this.router.navigateByUrl('/members');
-    }, error => {
-      this.validationErrors = error;
+    const dob = this.getDateOnly(this.registerForm.get('dateOfBirth')?.value);
+    this.registerForm.patchValue({dateOfBirth: dob});
+    this.accountService.register(this.registerForm.value).subscribe({
+      next: _ =>  this.router.navigateByUrl('/members'),
+      error: error => this.validationErrors = error,
     });
+  }
+
+  private getDateOnly(dob: string | undefined){
+    if(!dob)return;
+    return new Date(dob).toISOString().slice(0,10);
   }
 
   cancel() {
