@@ -1,5 +1,6 @@
 using API.Data;
 using API.Helper;
+using API.Helpers;
 using API.Interfaces;
 using API.Services;
 using Microsoft.EntityFrameworkCore;
@@ -20,7 +21,10 @@ public static class ApplicationServicesExtensions
         services.AddScoped<ITokenService, TokenServices>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IPhotoService, PhotoService>();
+        services.AddScoped<LogUserActivity>();
+        services.AddScoped<ILikesRepository, LikesRepository>();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
 
         return services;

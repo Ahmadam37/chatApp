@@ -1,42 +1,82 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { MembersService } from '../../_services/members.service';
+import { CommonModule } from '@angular/common';
+import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Member } from '../../_models/member';
-import { TabsModule } from 'ngx-bootstrap/tabs';
-import { GalleryModule, ImageItem } from 'ng-gallery';
-
-
-
+import { GalleryItem, GalleryModule, ImageItem } from 'ng-gallery';
+import { TabDirective, TabsModule, TabsetComponent } from 'ngx-bootstrap/tabs';
+import { TimeagoModule } from 'ngx-timeago';
+import { Member } from 'src/app/_models/member';
+import { MemberMessagesComponent } from '../member-messages/member-messages.component';
+import { MessageService } from 'src/app/_services/message.service';
+import { Message } from 'src/app/_models/message';
+import { PresenceService } from 'src/app/_services/presence.service';
+import { AccountService } from 'src/app/_services/account.service';
+import { User } from 'src/app/_models/user';
+import { take } from 'rxjs';
 
 @Component({
-  selector: 'app-members-details',
-  imports: [TabsModule, GalleryModule],
-  templateUrl: './members-details.component.html',
-  styleUrl: './members-details.component.css'
+  selector: 'app-member-detail',
+  standalone: true,
+  templateUrl: './member-detail.component.html',
+  styleUrls: ['./member-detail.component.css'],
+  imports: [CommonModule, TabsModule, GalleryModule, TimeagoModule, MemberMessagesComponent]
 })
-export class MembersDetailsComponent implements OnInit {
+export class MemberDetailComponent implements OnInit, OnDestroy {
+  private accountService = inject(AccountService);
+  @ViewChild('memberTabs', { static: true }) memberTabs?: TabsetComponent;
+  member: Member = {} as Member;
+  images: GalleryItem[] = [];
+  activeTab?: TabDirective;
+  messages: Message[] = [];
+  user = this.accountService.currentUser();
+
+  constructor(public presenceService: PresenceService, private route: ActivatedRoute,
+    private messageService: MessageService) {}
 
   ngOnInit(): void {
-    this.loadMember()
-  }
+    this.route.data.subscribe({
+      next: data => this.member = data['member']
+    })
 
-  private memberService = inject(MembersService);
-  private route = inject(ActivatedRoute);
-  member?: Member;
-  images: GalleryModule[] = [];
-
-
-  loadMember(){
-    const username = this.route.snapshot.paramMap.get('username');
-    if(!username) return;
-    this.memberService.getMember(username).subscribe({
-      next: member => {this.member = member;
-        member.photos.map(p => {
-          this.images.push(new ImageItem({src: p.url, thumb: p.url }))
-        })
-        
+    this.route.queryParams.subscribe({
+      next: params => {
+        params['tab'] && this.selectTab(params['tab'])
       }
     })
+
+    this.getImages()
+  }
+
+  ngOnDestroy(): void {
+    this.messageService.stopHubConnection();
+  }
+
+  loadMessages() {
+    if (this.member)
+      this.messageService.getMessageThread(this.member.userName).subscribe({
+        next: messages => this.messages = messages
+      })
+  }
+
+  selectTab(heading: string) {
+    if (this.memberTabs) {
+      this.memberTabs.tabs.find(x => x.heading === heading)!.active = true;
+    }
+  }
+
+  onTabActivated(data: TabDirective) {
+    this.activeTab = data;
+    if (this.activeTab.heading === 'Messages' && this.user) {
+      this.messageService.createHubConnection(this.user, this.member.userName);
+    } else {
+      this.messageService.stopHubConnection();
+    }
+  }
+
+  getImages() {
+    if (!this.member) return;
+    for (const photo of this.member?.photos) {
+      this.images.push(new ImageItem({ src: photo.url, thumb: photo.url }));
+    }
   }
 
 }

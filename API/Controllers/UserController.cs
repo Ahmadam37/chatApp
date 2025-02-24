@@ -1,7 +1,7 @@
-using System.Security.Claims;
 using API.DTOs;
 using API.Entitites;
 using API.Extensions;
+using API.Helper;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -13,9 +13,17 @@ namespace API.Controllers;
 public class UserController(IUserRepository userRepository, IMapper mapper, IPhotoService photoService) : BaseApiController
 {
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
+    public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers(UserParams userParams)
     {
-        var users = await userRepository.GetMemberAsync();
+
+        userParams.CurrentUsername = User.GetUsername();
+        var users = await userRepository.GetMembersAsync(userParams);
+
+        Response.AddPaginationHeader(new PaginationHeader
+        (users.CurrntPage,
+        users.PageSize,
+        users.TotalCount,
+        users.TotalPages));
 
         return Ok(users);
     }
@@ -62,7 +70,7 @@ public class UserController(IUserRepository userRepository, IMapper mapper, IPho
             PublicId = result.PublicId
         };
 
-        if(user.Photos.Count == 0) photo.IsMain = true;
+        if (user.Photos.Count == 0) photo.IsMain = true;
 
         user.Photos.Add(photo);
 
@@ -111,7 +119,7 @@ public class UserController(IUserRepository userRepository, IMapper mapper, IPho
             var result = await photoService.DeletePhotoAsync(photo.PublicId);
             if (result.Error != null) return BadRequest(result.Error.Message);
         }
-        
+
         user.Photos.Remove(photo);
 
         if (await userRepository.SaveAllAsync()) return Ok();
