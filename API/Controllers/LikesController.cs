@@ -1,4 +1,4 @@
-﻿using API.Controllers;
+using API.Controllers;
 using API.DTOs;
 using API.Entitites;
 using API.Extensions;
@@ -49,7 +49,7 @@ public class LikesController : BaseApiController
     }
 
     [HttpGet]
-    public async Task<ActionResult<PageList<LikeDto>>> GetUserLikes([FromQuery]Helpers.LikesParams likesParams)
+    public async Task<ActionResult<PageList<LikeDto>>> GetUserLikes([FromQuery]LikesParams likesParams)
     {
         likesParams.UserId = User.GetUserId();
 

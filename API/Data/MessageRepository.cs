@@ -1,6 +1,5 @@
-using System.Text.RegularExpressions;
 using API.DTOs;
-using API.Entitites;
+using API.Entities;
 using API.Helper;
 using API.Helpers;
 using API.Interfaces;
@@ -79,12 +78,7 @@ public class MessageRepository : IMessageRepository
 
         var messages = query.ProjectTo<MessageDto>(_mapper.ConfigurationProvider);
 
-        return await PagedList<MessageDto>.CreateAsync(messages, messageParams.PageNumber, messageParams.PageSize);
-    }
-
-    public Task<PageList<MessageDto>> GetMessagesForUser(Interfaces.MessageParams messageParams)
-    {
-        throw new NotImplementedException();
+        return await PageList<MessageDto>.CreateAsync(messages, messageParams.PageNumber, messageParams.PageSize);
     }
 
     public async Task<IEnumerable<MessageDto>> GetMessageThread(string currentUserName, string recipientUserName)
@@ -117,23 +111,4 @@ public class MessageRepository : IMessageRepository
     {
         _context.Connections.Remove(connection);
     }
-
-    public void RemoveConnection(DbLoggerCategory.Database.Connection connection)
-    {
-        throw new NotImplementedException();
-    }
-
-    Task<DbLoggerCategory.Database.Connection?> IMessageRepository.GetConnection(string connectionId)
-    {
-        throw new NotImplementedException();
-    }
-
-    Task<PageList<MessageDto>> IMessageRepository.GetMessagesForUser(MessageParams messageParams)
-    {
-        throw new NotImplementedException();
-    }
-}
-
-public class Message
-{
 }

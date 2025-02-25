@@ -1,4 +1,4 @@
-﻿using API.Interfaces;
+using API.Interfaces;
 using AutoMapper;
 
 namespace API.Data;
@@ -18,10 +18,6 @@ public class UnitOfWork : IUnitOfWork
     public IMessageRepository MessageRepository => new MessageRepository(_context, _mapper);
 
     public ILikesRepository LikesRepository => new LikesRepository(_context);
-
-    IUserRepository IUnitOfWork.UserRepository { get => UserRepository; set => throw new NotImplementedException(); }
-
-    object IUnitOfWork.LikesRepository => LikesRepository;
 
     public async Task<bool> Complete()
     {

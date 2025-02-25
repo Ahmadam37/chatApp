@@ -23,7 +23,7 @@ public class LikesRepository : ILikesRepository
         return await _context.Likes.FindAsync(sourceUserId, targetUserId);
     }
 
-    public async Task<PageList<LikeDto>> GetUserLikes(Helpers.LikesParams likesParams)
+    public async Task<PageList<LikeDto>> GetUserLikes(LikesParams likesParams)
     {
         var users = _context.Users.OrderBy(u => u.UserName).AsQueryable();
         var likes = _context.Likes.AsQueryable();
@@ -57,7 +57,9 @@ public class LikesRepository : ILikesRepository
 
     public async Task<AppUser?> GetUserWithLikes(int userId)
     {
-        return await _context.Users.Include(x => x.LikedUsers).FirstOrDefaultAsync(x => x.Id == userId);
+        return await _context.Users
+            .Include(x => x.LikedUsers)
+            .FirstOrDefaultAsync(x => x.Id == userId);
     }
 
 }

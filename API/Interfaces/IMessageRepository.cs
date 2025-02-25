@@ -1,8 +1,7 @@
-using System.Text.RegularExpressions;
-using API.Data;
 using API.DTOs;
+using API.Entities;
 using API.Helper;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using API.Helpers;
 
 namespace API.Interfaces;
 
@@ -18,9 +17,4 @@ public interface IMessageRepository
     Task<Connection?> GetConnection(string connectionId);
     Task<Group?> GetMessageGroup(string groupName);
     Task<Group?> GetGroupForConnection(string connectionId);
-}
-
-public class MessageParams
-{
-    public object Username { get; internal set; }
 }
