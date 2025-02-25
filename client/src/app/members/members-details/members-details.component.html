@@ -1,27 +1,27 @@
 <div class="row">
     <div class="col-4">
         <div class="card">
-            <img src="{{member?.photoUrl || './assets/user.png'}}" alt="{{member?.knownAs}}"
+            <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}"
                 class="card-img-top img-thumbnail">
             <div class="card-body">
-                <div class="mb-2" *ngIf="(presenceService.onlineUsers$ | async)?.includes(member.userName)">
+                <div class="mb-2" *ngIf="(presenceService.onlineUsers$ | async)?.includes(member.username)">
                     <i class="fa fa-user-circle text-success"></i> Online now
                 </div>
                 <div>
                     <strong>Location:</strong>
-                    <p>{{member?.city}}, {{member?.country}}</p>
+                    <p>{{member.city}}, {{member.country}}</p>
                 </div>
                 <div>
                     <strong>Age:</strong>
-                    <p>{{member?.age}}</p>
+                    <p>{{member.age}}</p>
                 </div>
                 <div>
                     <strong>Last active:</strong> 
-                    <p>{{member?.lastActive | timeago}}</p>
+                    <p>{{member.lastActive | timeago}}</p>
                 </div>
                 <div>
                     <strong>Member since:</strong>
-                    <p>{{member?.created | date:'dd MMM yyyy'}}</p>
+                    <p>{{member.created | date:'dd MMM yyyy'}}</p>
                 </div>
             </div>
             <div class="card-footer">
@@ -36,13 +36,13 @@
         <tabset class="member-tabset" #memberTabs>
             <tab heading="About {{member.knownAs}}" (selectTab)="onTabActivated($event)">
                 <h4>Description</h4>
-                <p>{{member?.introduction}}</p>
+                <p>{{member.introduction}}</p>
                 <h4>Looking for</h4>
-                <p>{{member?.lookingFor}}</p>
+                <p>{{member.lookingFor}}</p>
             </tab>
             <tab heading="Interests" (selectTab)="onTabActivated($event)">
                 <h4>Interests</h4>
-                <p>{{member?.interests}}</p>
+                <p>{{member.interests}}</p>
             </tab>
             <tab heading="Photos" #photoTab="tab" (selectTab)="onTabActivated($event)">
                 <gallery *ngIf="photoTab.active" [items]="images" class="gallery"></gallery>

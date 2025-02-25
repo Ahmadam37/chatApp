@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "49gcYXUbsq0=",
+  "dgSpecHash": "M+uCThzp5+E=",
   "success": true,
   "projectFilePath": "C:\\Users\\ahmadam37\\OneDrive\\Desktop\\Development\\WebDevelopment\\Projects\\chatApp\\API\\API.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,9 @@
     "C:\\Users\\ahmadam37\\.nuget\\packages\\cloudinarydotnet\\1.27.4\\cloudinarydotnet.1.27.4.nupkg.sha512",
     "C:\\Users\\ahmadam37\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\ahmadam37\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.12\\microsoft.aspnetcore.authentication.jwtbearer.8.0.12.nupkg.sha512",
+    "C:\\Users\\ahmadam37\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\7.0.0\\microsoft.aspnetcore.cryptography.internal.7.0.0.nupkg.sha512",
+    "C:\\Users\\ahmadam37\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\7.0.0\\microsoft.aspnetcore.cryptography.keyderivation.7.0.0.nupkg.sha512",
+    "C:\\Users\\ahmadam37\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\7.0.0\\microsoft.aspnetcore.identity.entityframeworkcore.7.0.0.nupkg.sha512",
     "C:\\Users\\ahmadam37\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
     "C:\\Users\\ahmadam37\\.nuget\\packages\\microsoft.bcl.memory\\9.0.0\\microsoft.bcl.memory.9.0.0.nupkg.sha512",
     "C:\\Users\\ahmadam37\\.nuget\\packages\\microsoft.build.framework\\17.8.3\\microsoft.build.framework.17.8.3.nupkg.sha512",
@@ -33,6 +36,8 @@
     "C:\\Users\\ahmadam37\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\9.0.1\\microsoft.extensions.dependencyinjection.9.0.1.nupkg.sha512",
     "C:\\Users\\ahmadam37\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.1\\microsoft.extensions.dependencyinjection.abstractions.9.0.1.nupkg.sha512",
     "C:\\Users\\ahmadam37\\.nuget\\packages\\microsoft.extensions.dependencymodel\\9.0.1\\microsoft.extensions.dependencymodel.9.0.1.nupkg.sha512",
+    "C:\\Users\\ahmadam37\\.nuget\\packages\\microsoft.extensions.identity.core\\7.0.0\\microsoft.extensions.identity.core.7.0.0.nupkg.sha512",
+    "C:\\Users\\ahmadam37\\.nuget\\packages\\microsoft.extensions.identity.stores\\7.0.0\\microsoft.extensions.identity.stores.7.0.0.nupkg.sha512",
     "C:\\Users\\ahmadam37\\.nuget\\packages\\microsoft.extensions.logging\\9.0.1\\microsoft.extensions.logging.9.0.1.nupkg.sha512",
     "C:\\Users\\ahmadam37\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\9.0.1\\microsoft.extensions.logging.abstractions.9.0.1.nupkg.sha512",
     "C:\\Users\\ahmadam37\\.nuget\\packages\\microsoft.extensions.options\\9.0.1\\microsoft.extensions.options.9.0.1.nupkg.sha512",

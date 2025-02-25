@@ -1,4 +1,4 @@
-import { Component, inject, input, OnInit, output } from '@angular/core';
+import { Component, inject, Input, input, OnInit, output } from '@angular/core';
 import { Member } from '../../_models/member';
 import { DecimalPipe, NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
 import {FileUploader, FileUploadModule } from 'ng2-file-upload';
@@ -18,13 +18,14 @@ import { Photo } from '../../_models/photo';
 })
 export class PhotoEditorComponent implements OnInit {
 
-  private accountService = inject(AccountService)
-  member = input.required<Member>();
-  uploader?: FileUploader;
-  private memberService = inject(MembersService)
-  hasBaseDropZoneOver = false;
+  private accountService = inject(AccountService);
+  @Input() member: Member | undefined;
+  uploader: FileUploader | undefined;
+  hasBaseDropzoneOver = false;
   baseUrl = environment.apiUrl;
-  memberChange = output<Member>();
+  user = this.accountService.currentUser();
+
+  constructor(private memberService: MembersService) {}
 
   ngOnInit(){
     this.initializeUploader();
@@ -32,73 +33,60 @@ export class PhotoEditorComponent implements OnInit {
 
   fileOverBase(s: any){
 
-    this.hasBaseDropZoneOver = s;
+    this.hasBaseDropzoneOver = s;
   }
 
-  setMainPhoto(photo:Photo){
-    this.memberService.setMainPhoto(photo).subscribe({
+  setMainPhoto(photo: Photo) {
+    this.memberService.setMainPhoto(photo.id).subscribe({
       next: _ => {
-        const user = this.accountService.currentUser();
-        if(user){
-          user.photoUrl = photo.url;
-          this.accountService.setCurrentUser(user);
+        if (this.user && this.member) {
+          this.user.photoUrl = photo.url;
+          this.accountService.setCurrentUser(this.user);
+          this.member.photoUrl = photo.url;
+          this.member.photos.forEach(p => {
+            if (p.isMain) p.isMain = false;
+            if (p.id === photo.id) p.isMain = true;
+          })
         }
-        const updateMember = {...this.member()}
-        updateMember.photoUrl = photo.url;
-        updateMember.photos.forEach(p => {
-          if(p.isMain) p.isMain = false;
-          if(p.id === photo.id) p.isMain =true;
-        });
-        this.memberChange.emit(updateMember);
       }
     })
   }
 
-  deletePhoto(photo: Photo){
-    this.memberService.deletePhoto(photo).subscribe({
+  deletePhoto(photoId: number) {
+    this.memberService.deletePhoto(photoId).subscribe({
       next: _ => {
-        const updateMember = {...this.member()};
-        updateMember.photos  = updateMember.photos.filter(x => x.id !== photo.id);
-        this.memberChange.emit(updateMember);
+        if (this.member) {
+          this.member.photos = this.member?.photos.filter(x => x.id !== photoId)
+        }
       }
     })
   }
 
-  initializeUploader(){
+  initializeUploader() {
     this.uploader = new FileUploader({
-      url: this.baseUrl + 'user/add-photo',
-      authToken: 'Bearer ' + this.accountService.currentUser()?.token,
+      url: this.baseUrl + 'users/add-photo',
+      authToken: 'Bearer ' + this.user?.token,
       isHTML5: true,
       allowedFileType: ['image'],
       removeAfterUpload: true,
       autoUpload: false,
-      maxFileSize:10 * 1024 * 1024,
+      maxFileSize: 10 * 1024 * 1024
     });
 
     this.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = false;
     }
 
-    this.uploader.onSuccessItem = (item , response , status , header) => {
-      const photo = JSON.parse(response);
-      const updatedMember = {...this.member()}
-      updatedMember.photos.push(photo);
-      this.memberChange.emit(updatedMember);
-
-      if(photo.isMain){
-        const user = this.accountService.currentUser();
-        if(user){
-          user.photoUrl = photo.url;
-          this.accountService.setCurrentUser(user);
+    this.uploader.onSuccessItem = (item, response, status, headers) => {
+      if (response) {
+        const photo = JSON.parse(response);
+        this.member?.photos.push(photo);
+        if (photo.isMain && this.user && this.member) {
+          this.user.photoUrl = photo.url;
+          this.member.photoUrl = photo.url;
+          this.accountService.setCurrentUser(this.user);
         }
-        updatedMember.photoUrl = photo.url;
-        updatedMember.photos.forEach(p => {
-          if(p.isMain) p.isMain = false;
-          if(p.id === photo.id) p.isMain =true;
-        });
-        this.memberChange.emit(updatedMember);
       }
-      
     }
   }
 

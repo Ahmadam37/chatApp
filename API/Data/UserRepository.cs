@@ -70,8 +70,4 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
         context.Entry(user).State = EntityState.Modified;
     }
 
-    public Task GetUserByIdAsync(string username)
-    {
-        throw new NotImplementedException();
-    }
 }

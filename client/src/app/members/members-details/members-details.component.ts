@@ -1,26 +1,30 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MembersService } from '../../_services/members.service';
 import { ActivatedRoute } from '@angular/router';
+import { Member } from '../../_models/member';
+import { TabDirective, TabsetComponent, TabsModule } from 'ngx-bootstrap/tabs';
 import { GalleryItem, GalleryModule, ImageItem } from 'ng-gallery';
-import { TabDirective, TabsModule, TabsetComponent } from 'ngx-bootstrap/tabs';
 import { TimeagoModule } from 'ngx-timeago';
-import { Member } from 'src/app/_models/member';
+import { CommonModule, DatePipe } from '@angular/common';
+import { AccountService } from '../../_services/account.service';
+import { PresenceService } from '../../_services/presence.service';
+import { MessageService } from '../../_services/message.service';
+import { Message } from '../../_models/message';
 import { MemberMessagesComponent } from '../member-messages/member-messages.component';
-import { MessageService } from 'src/app/_services/message.service';
-import { Message } from 'src/app/_models/message';
-import { PresenceService } from 'src/app/_services/presence.service';
-import { AccountService } from 'src/app/_services/account.service';
-import { User } from 'src/app/_models/user';
-import { take } from 'rxjs';
+
+
+
+
+
 
 @Component({
   selector: 'app-member-detail',
   standalone: true,
-  templateUrl: './member-detail.component.html',
-  styleUrls: ['./member-detail.component.css'],
-  imports: [CommonModule, TabsModule, GalleryModule, TimeagoModule, MemberMessagesComponent]
+  templateUrl: './members-details.component.html',
+  styleUrl: './members-details.component.css',
+  imports: [CommonModule, TabsModule, GalleryModule, TimeagoModule]
 })
-export class MemberDetailComponent implements OnInit, OnDestroy {
+export class MembersDetailsComponent implements OnInit, OnDestroy {
   private accountService = inject(AccountService);
   @ViewChild('memberTabs', { static: true }) memberTabs?: TabsetComponent;
   member: Member = {} as Member;
@@ -52,7 +56,7 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
 
   loadMessages() {
     if (this.member)
-      this.messageService.getMessageThread(this.member.userName).subscribe({
+      this.messageService.getMessageThread(this.member.username).subscribe({
         next: messages => this.messages = messages
       })
   }
@@ -66,7 +70,7 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
   onTabActivated(data: TabDirective) {
     this.activeTab = data;
     if (this.activeTab.heading === 'Messages' && this.user) {
-      this.messageService.createHubConnection(this.user, this.member.userName);
+      this.messageService.createHubConnection(this.user, this.member.username);
     } else {
       this.messageService.stopHubConnection();
     }

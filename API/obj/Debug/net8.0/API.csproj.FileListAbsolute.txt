@@ -157,6 +157,14 @@ C:\Users\TEMP.AHMADAM37\OneDrive\Desktop\Development\WebDevelopment\Projects\cha
 C:\Users\TEMP.AHMADAM37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\bin\Debug\net8.0\runtimes\win-x86\native\e_sqlite3.dll
 C:\Users\TEMP.AHMADAM37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 C:\Users\TEMP.AHMADAM37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\obj\Debug\net8.0\API.sourcelink.json
+C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\obj\Debug\net8.0\API.csproj.AssemblyReference.cache
+C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\obj\Debug\net8.0\API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\obj\Debug\net8.0\API.AssemblyInfoInputs.cache
+C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\obj\Debug\net8.0\API.AssemblyInfo.cs
+C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\obj\Debug\net8.0\API.csproj.CoreCompileInputs.cache
+C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\obj\Debug\net8.0\API.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\obj\Debug\net8.0\API.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\obj\Debug\net8.0\API.sourcelink.json
 C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\bin\Debug\net8.0\appsettings.json
 C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\bin\Debug\net8.0\Data\UserSeedData.json
@@ -307,14 +315,6 @@ C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\
 C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\bin\Debug\net8.0\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\bin\Debug\net8.0\runtimes\win-x86\native\e_sqlite3.dll
 C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
-C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\obj\Debug\net8.0\API.csproj.AssemblyReference.cache
-C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\obj\Debug\net8.0\API.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\obj\Debug\net8.0\API.AssemblyInfoInputs.cache
-C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\obj\Debug\net8.0\API.AssemblyInfo.cs
-C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\obj\Debug\net8.0\API.csproj.CoreCompileInputs.cache
-C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\obj\Debug\net8.0\API.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\obj\Debug\net8.0\API.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\obj\Debug\net8.0\API.sourcelink.json
 C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\obj\Debug\net8.0\staticwebassets\msbuild.API.Microsoft.AspNetCore.StaticWebAssets.props
@@ -329,3 +329,4 @@ C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\
 C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\obj\Debug\net8.0\API.pdb
 C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\obj\Debug\net8.0\API.genruntimeconfig.cache
 C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\obj\Debug\net8.0\ref\API.dll
+C:\Users\ahmadam37\OneDrive\Desktop\Development\WebDevelopment\Projects\chatApp\API\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll

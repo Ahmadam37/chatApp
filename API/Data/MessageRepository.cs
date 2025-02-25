@@ -1,5 +1,6 @@
 using API.DTOs;
 using API.Entities;
+using API.Entitites;
 using API.Helper;
 using API.Helpers;
 using API.Interfaces;
@@ -60,7 +61,7 @@ public class MessageRepository : IMessageRepository
             .FirstOrDefaultAsync(x => x.Name == groupName);
     }
 
-    public async Task<PageList<MessageDto>> GetMessagesForUser(Helpers.MessageParams messageParams)
+    public async Task<PageList<MessageDto>> GetMessagesForUser(MessageParams messageParams)
     {
         var query = _context.Messages
             .OrderByDescending(x => x.MessageSent)

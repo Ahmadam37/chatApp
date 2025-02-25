@@ -1,36 +1,44 @@
-<div class="row">
-    @for (photo of member().photos; track photo.id) {
-    <div class="col-2">
+<div class="row" *ngIf="member">
+    <div class="col-2 mb-1" *ngFor="let photo of member.photos">
         <img src="{{photo.url}}" alt="photo of user" class="img-thumbnail mb-1">
-        <button class="btn btn-sm me-1"
-        [disabled]="photo.isMain"
-        (click)="setMainPhoto(photo)"
-        [ngClass]="photo.isMain ? 'btn-success active' : 'btn-outline-success'"
-        >
-        Main
-        </button>
-        <button class="btn btn-sm btn-danger"
-        [disabled]="photo.isMain"
-        (click)="deletePhoto(photo)"><i class="fa fa-trash"></i></button>
+        <div class="text-center">
+            <button  
+                class="btn btn-sm"
+                [disabled]="photo.isMain"
+                (click)="setMainPhoto(photo)"
+                [ngClass]='photo.isMain ? "btn-success active" : "btn-outline-success"'
+            >
+                Main
+            </button>
+            <button 
+                [disabled]="photo.isMain"
+                (click)="deletePhoto(photo.id)"
+                class="btn btn-sm btn-danger"
+            ><i class="fa fa-trash"></i></button>
+        </div>
     </div>
-    }
 </div>
 
-
-<div class="row mt-5">
+<div class="row mt-3">
  
     <div class="col-md-3">
 
-        <h3>Add photos</h3>
+        <h3>Add Photos</h3>
 
         <div ng2FileDrop
-             [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+             [ngClass]="{'nv-file-over': hasBaseDropzoneOver}"
              (fileOver)="fileOverBase($event)"
              [uploader]="uploader"
-             class="card bg-faded p-5 text-center my-drop-zone">
+             class="card bg-faded p-3 text-center mb-3 my-drop-zone">
              <i class="fa fa-upload fa-3x"></i>
-            Base drop zone
+            Drop photos here
         </div>
+
+        Multiple
+        <input type="file" ng2FileSelect [uploader]="uploader" multiple  /><br/>
+
+        Single
+        <input type="file" ng2FileSelect [uploader]="uploader" />
     </div>
 
     <div class="col-md-9" style="margin-bottom: 40px" *ngIf="uploader?.queue?.length">
@@ -66,7 +74,7 @@
             </button>
             <button type="button" class="btn btn-warning btn-s"
                     (click)="uploader?.cancelAll()" [disabled]="!uploader?.isUploading">
-                <span class="fa fa-ban-circle"></span> Cancel all
+                <span class="fa fa-ban"></span> Cancel all
             </button>
             <button type="button" class="btn btn-danger btn-s"
                     (click)="uploader?.clearQueue()" [disabled]="!uploader?.queue?.length">
